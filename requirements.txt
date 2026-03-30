@@ -1,0 +1,11 @@
+scikit-learn
+pandas
+numpy
+scikit-fuzzy
+networkx
+skl2onnx
+onnxruntime
+joblib
+matplotlib
+seaborn
+jupyter

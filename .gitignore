@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+.ipynb_checkpoints/
+venv/
+.venv/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+frontend/dist/
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Jupyter
+.jupyter/
+
+# IDEs
+.vscode/
+.idea/
