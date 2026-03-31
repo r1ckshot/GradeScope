@@ -27,6 +27,12 @@ desktop.ini
 # Jupyter
 .jupyter/
 
+# Generated data files
+data/*.pkl
+
+# Report folder — generated charts (png)
+report/
+
 # IDEs
 .vscode/
 .idea/
