@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #0d0f0d;
+  color: #e8f5e8;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Floating blobs */
+.blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+  background: #39ff14;
+  animation: floatDown linear infinite;
+}
+
+@keyframes floatDown {
+  0%   { transform: translateY(-20vh) scale(1); }
+  50%  { transform: translateY(50vh) scale(1.1); }
+  100% { transform: translateY(120vh) scale(0.95); }
+}
+
+/* Glassmorphism card */
+.glass {
+  background: rgba(15, 22, 15, 0.65);
+  border: 1px solid rgba(57, 255, 20, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0d0f0d; }
+::-webkit-scrollbar-thumb { background: rgba(57, 255, 20, 0.25); border-radius: 3px; }
