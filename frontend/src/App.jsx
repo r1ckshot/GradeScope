@@ -2,6 +2,7 @@ import { useState } from 'react'
 import SliderInput from './components/SliderInput'
 import DropdownInput from './components/DropdownInput'
 import ModelCard from './components/ModelCard'
+import FuzzyGauge from './components/FuzzyGauge'
 
 const SLIDERS = [
   { key: 'Attendance',        label: 'Attendance (%)',    min: 60, max: 100, mean: 80 },
@@ -39,7 +40,7 @@ function Card({ title, subtitle, children, style = {} }) {
           <span className="text-sm ml-2 font-normal" style={{ color: 'rgba(255,255,255,0.3)' }}> — {subtitle}</span>
         )}
       </div>
-      <div style={{ padding: '0 18px 16px 18px' }} className="flex flex-col flex-1 min-h-0">
+      <div style={{ padding: '0 18px 16px 18px' }} className="flex flex-col flex-1 min-h-0 gap-3">
         {children}
       </div>
     </div>
@@ -104,6 +105,10 @@ function App() {
             <ModelCard model="random_forest"     result={{ prediction: 1, confidence: 0.87 }} />
             <ModelCard model="svm"               result={{ prediction: 1, confidence: 0.91 }} />
             <ModelCard model="gradient_boosting" result={{ prediction: 0, confidence: 0.62 }} />
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <FuzzyGauge score={50} />
+            <div>{/* RuleDisplay placeholder */}</div>
           </div>
         </Card>
 
