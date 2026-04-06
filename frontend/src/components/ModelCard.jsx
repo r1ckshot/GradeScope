@@ -1,0 +1,48 @@
+const MODEL_LABELS = {
+  random_forest:       'Random Forest',
+  svm:                 'SVM',
+  gradient_boosting:   'Gradient Boosting',
+}
+
+export default function ModelCard({ model, result }) {
+  const label = MODEL_LABELS[model] ?? model
+  const pass = result?.prediction === 1
+  const confidence = result?.confidence ?? null
+  const color = result ? (pass ? '#39ff14' : '#ff4444') : 'rgba(255,255,255,0.15)'
+
+  return (
+    <div
+      className="rounded-xl flex flex-col gap-2"
+      style={{
+        background: 'rgba(57,255,20,0.04)',
+        border: '1px solid rgba(57,255,20,0.09)',
+        padding: '12px 14px 10px 14px',
+      }}
+    >
+      <span className="text-sm text-gray-400 leading-tight">{label}</span>
+
+      <div className="flex items-center gap-2">
+        <span className="text-sm font-bold shrink-0 w-8" style={{ color }}>
+          {result ? (pass ? 'PASS' : 'FAIL') : '—'}
+        </span>
+
+        <div className="flex-1 rounded-full overflow-hidden" style={{ height: '4px', background: 'rgba(255,255,255,0.08)' }}>
+          {confidence !== null && (
+            <div
+              className="h-full rounded-full transition-all duration-500"
+              style={{
+                width: `${confidence * 100}%`,
+                background: color,
+                boxShadow: `0 0 6px ${color}80`,
+              }}
+            />
+          )}
+        </div>
+
+        <span className="text-sm font-mono font-semibold shrink-0" style={{ color: 'rgba(255,255,255,0.55)' }}>
+          {confidence !== null ? `${(confidence * 100).toFixed(1)}%` : '—'}
+        </span>
+      </div>
+    </div>
+  )
+}

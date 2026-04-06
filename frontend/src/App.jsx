@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import SliderInput from './components/SliderInput'
 import DropdownInput from './components/DropdownInput'
+import ModelCard from './components/ModelCard'
 
 const SLIDERS = [
   { key: 'Attendance',        label: 'Attendance (%)',    min: 60, max: 100, mean: 80 },
@@ -98,8 +99,12 @@ function App() {
         </div>
 
         {/* Right column — Prediction */}
-        <Card title="Prediction" style={{}}>
-          <p className="text-base" style={{ color: 'rgba(255,255,255,0.25)' }}>Results will appear here...</p>
+        <Card title="Prediction" subtitle="model results">
+          <div className="grid grid-cols-3 gap-2">
+            <ModelCard model="random_forest"     result={{ prediction: 1, confidence: 0.87 }} />
+            <ModelCard model="svm"               result={{ prediction: 1, confidence: 0.91 }} />
+            <ModelCard model="gradient_boosting" result={{ prediction: 0, confidence: 0.62 }} />
+          </div>
         </Card>
 
       </div>
