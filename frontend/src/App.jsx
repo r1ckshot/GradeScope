@@ -43,15 +43,15 @@ const defaultValues = () => {
 function Card({ title, subtitle, children, style = {}, gap = 'gap-3' }) {
   return (
     <div className="glass rounded-2xl flex flex-col" style={style}>
-      <div style={{ padding: '16px 18px 10px 18px' }}>
-        <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: '#39ff14' }}>
+      <div style={{ padding: '18px 22px 12px 22px' }}>
+        <span className="text-base font-semibold uppercase tracking-widest" style={{ color: '#39ff14' }}>
           {title}
         </span>
         {subtitle && (
-          <span className="text-sm ml-2 font-normal" style={{ color: 'rgba(255,255,255,0.3)' }}> — {subtitle}</span>
+          <span className="text-sm ml-2 font-normal" style={{ color: 'rgba(255,255,255,0.5)' }}> — {subtitle}</span>
         )}
       </div>
-      <div style={{ padding: '0 18px 16px 18px' }} className={`flex flex-col flex-1 min-h-0 ${gap}`}>
+      <div style={{ padding: '0 22px 20px 22px' }} className={`flex flex-col flex-1 min-h-0 ${gap}`}>
         {children}
       </div>
     </div>
@@ -100,22 +100,22 @@ function App() {
   return (
     <>
     <Blobs ref={blobsRef} />
-    <div className="h-screen overflow-hidden flex flex-col" style={{ padding: '10px 30px 100px 30px', position: 'relative', zIndex: 1 }}>
+    <div className="h-screen overflow-hidden flex flex-col" style={{ padding: '18px 18px 100px 18px', position: 'relative', zIndex: 1 }}>
 
       {/* Header card */}
-      <div className="glass rounded-2xl shrink-0" style={{ marginTop: '84px', padding: '14px 22px' }}>
+      <div className="glass rounded-2xl shrink-0" style={{ marginTop: '70px', padding: '10px 26px' }}>
         <h1 className="text-3xl font-bold leading-none" style={{ color: '#39ff14' }}>
           GradeScope <span className="text-2xl font-normal" style={{ color: 'rgba(255,255,255,0.35)' }}>— Student Performance Predictor</span>
         </h1>
       </div>
 
       {/* Two-column layout */}
-      <div className="flex-1 min-h-0 grid" style={{ gridTemplateColumns: '1fr 72px 1fr', gap: '0 0' }}>
+      <div className="flex-1 min-h-0 grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '0 20px' }}>
 
         {/* Left column */}
-        <div className="flex flex-col gap-4 min-h-0 justify-center">
+        <div className="flex flex-col gap-3 min-h-0 justify-center">
           <Card title="Academic" subtitle="numeric performance factors">
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-3 gap-3">
               {SLIDERS.map(s => (
                 <SliderInput key={s.key} label={s.label} min={s.min} max={s.max}
                   value={values[s.key]} onChange={val => set(s.key, val)} />
@@ -123,7 +123,7 @@ function App() {
             </div>
           </Card>
           <Card title="Background" subtitle="socioeconomic factors">
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-3 gap-3">
               {DROPDOWNS.map(d => (
                 <DropdownInput key={d.key} label={d.label}
                   value={values[d.key]} onChange={val => set(d.key, val)} />
@@ -132,18 +132,15 @@ function App() {
           </Card>
         </div>
 
-        {/* Middle — lava lamp space */}
-        <div />
-
         {/* Right column — Prediction */}
         <div className="flex flex-col min-h-0 justify-center">
           <Card title="Prediction" subtitle="model results" gap="gap-5">
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-3 gap-3">
               <ModelCard model="random_forest"     result={results?.random_forest} />
               <ModelCard model="svm"               result={results?.svm} />
               <ModelCard model="gradient_boosting" result={results?.gradient_boosting} />
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-3">
               <FuzzyGauge score={fuzzyScore} />
               <RuleDisplay rule={activeRule} />
             </div>

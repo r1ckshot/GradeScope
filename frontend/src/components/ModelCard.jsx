@@ -16,21 +16,21 @@ export default function ModelCard({ model, result }) {
       style={{
         background: 'rgba(57,255,20,0.04)',
         border: '1px solid rgba(57,255,20,0.09)',
-        padding: '12px 14px 10px 14px',
+        padding: '14px 16px 12px 16px',
       }}
     >
-      <span className="text-sm text-gray-400 leading-tight">{label}</span>
+      <span className="text-base text-gray-400 leading-tight">{label}</span>
 
       <div className="flex justify-between items-center">
-        <span className="text-base font-bold" style={{ color }}>
+        <span className="text-lg font-bold" style={{ color }}>
           {result ? (pass ? 'PASS' : 'FAIL') : '—'}
         </span>
-        <span className="text-lg font-mono font-bold" style={{ color: 'rgba(255,255,255,0.6)' }}>
+        <span className="text-xl font-mono font-bold" style={{ color: 'rgba(255,255,255,0.6)' }}>
           {confidence !== null ? `${(confidence * 100).toFixed(1)}%` : '—'}
         </span>
       </div>
 
-      <div className="w-full rounded-full overflow-hidden" style={{ height: '4px', background: 'rgba(255,255,255,0.08)' }}>
+      <div className="w-full rounded-full overflow-hidden" style={{ height: '5px', background: 'rgba(255,255,255,0.08)' }}>
         {confidence !== null && (
           <div
             className="h-full rounded-full transition-all duration-500"

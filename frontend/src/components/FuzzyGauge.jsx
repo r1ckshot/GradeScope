@@ -33,20 +33,20 @@ export default function FuzzyGauge({ score }) {
       style={{
         background: 'rgba(57,255,20,0.04)',
         border: '1px solid rgba(57,255,20,0.09)',
-        padding: '12px 14px 8px 14px',
+        padding: '14px 16px 10px 16px',
       }}
     >
       <div className="flex justify-between items-center mb-1">
         <div>
-          <span className="text-sm text-gray-400">Fuzzy Score</span>
+          <span className="text-base text-gray-400">Fuzzy Score</span>
           <span className="text-sm font-normal ml-2" style={{ color: 'rgba(255,255,255,0.3)' }}> - Attendance × H. Studied</span>
         </div>
-        <span className="text-lg font-mono font-bold" style={{ color }}>
+        <span className="text-xl font-mono font-bold" style={{ color }}>
           {score !== null && score !== undefined ? Math.round(value) : '—'}
         </span>
       </div>
 
-      <svg viewBox="8 10 184 106" width="100%" style={{ overflow: 'visible' }}>
+      <svg viewBox="8 6 184 116" width="100%" style={{ overflow: 'visible' }}>
         {/* Background arc */}
         <path d={arcPath(Math.PI, 0)} fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="10" strokeLinecap="round" />
         {/* Progress arc */}
@@ -70,9 +70,9 @@ export default function FuzzyGauge({ score }) {
         {/* Pivot */}
         <circle cx={cx} cy={cy} r="4" fill={color} />
         {/* Zone labels */}
-        <text x="22"  y="113" textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.3)">Low</text>
-        <text x="100" y="36"  textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.3)">Mid</text>
-        <text x="178" y="113" textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.3)">High</text>
+        <text x="22"  y="115" textAnchor="middle" fontSize="11" fill="rgba(255,255,255,0.4)">Low</text>
+        <text x="100" y="38"  textAnchor="middle" fontSize="11" fill="rgba(255,255,255,0.4)">Mid</text>
+        <text x="178" y="115" textAnchor="middle" fontSize="11" fill="rgba(255,255,255,0.4)">High</text>
       </svg>
     </div>
   )

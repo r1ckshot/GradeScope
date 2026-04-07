@@ -7,10 +7,10 @@ export default function DropdownInput({ label, value, onChange }) {
       style={{
         background: 'rgba(57,255,20,0.04)',
         border: '1px solid rgba(57,255,20,0.09)',
-        padding: '12px 14px 10px 14px',
+        padding: '14px 16px 12px 16px',
       }}
     >
-      <span className="text-sm text-gray-400 block" style={{ marginBottom: '10px' }}>{label}</span>
+      <span className="text-base text-gray-400 block" style={{ marginBottom: '10px' }}>{label}</span>
       <div
         className="relative w-full rounded-lg overflow-hidden"
         style={{ border: '1px solid rgba(57,255,20,0.18)', background: 'rgba(10,18,10,0.95)' }}
@@ -18,7 +18,7 @@ export default function DropdownInput({ label, value, onChange }) {
         <select
           value={value}
           onChange={e => onChange(Number(e.target.value))}
-          className="w-full py-2 text-sm font-semibold cursor-pointer outline-none appearance-none"
+          className="w-full py-2 text-base font-semibold cursor-pointer outline-none appearance-none"
           style={{ background: 'transparent', color: '#39ff14', paddingLeft: '10px', paddingRight: '28px' }}
         >
           {OPTIONS.map((opt, i) => (
