@@ -1,0 +1,84 @@
+{
+  "features": [
+    "Attendance",
+    "Hours_Studied",
+    "Previous_Scores",
+    "Tutoring_Sessions",
+    "Sleep_Hours",
+    "Parental_Involvement",
+    "Access_to_Resources",
+    "Physical_Activity",
+    "Peer_Influence",
+    "Family_Income",
+    "Parental_Education_Level",
+    "Distance_from_Home"
+  ],
+  "feature_meta": {
+    "Attendance": {
+      "min": 60,
+      "max": 100,
+      "mean": 79.91
+    },
+    "Hours_Studied": {
+      "min": 1,
+      "max": 44,
+      "mean": 19.93
+    },
+    "Previous_Scores": {
+      "min": 50,
+      "max": 100,
+      "mean": 75.17
+    },
+    "Tutoring_Sessions": {
+      "min": 0,
+      "max": 8,
+      "mean": 1.5
+    },
+    "Sleep_Hours": {
+      "min": 4,
+      "max": 10,
+      "mean": 7.04
+    },
+    "Parental_Involvement": {
+      "min": 0,
+      "max": 2,
+      "mean": 1.22
+    },
+    "Access_to_Resources": {
+      "min": 0,
+      "max": 2,
+      "mean": 1.2
+    },
+    "Physical_Activity": {
+      "min": 0,
+      "max": 6,
+      "mean": 2.97
+    },
+    "Peer_Influence": {
+      "min": 0,
+      "max": 2,
+      "mean": 1.19
+    },
+    "Family_Income": {
+      "min": 0,
+      "max": 2,
+      "mean": 1.21
+    },
+    "Parental_Education_Level": {
+      "min": 0,
+      "max": 2,
+      "mean": 0.89
+    },
+    "Distance_from_Home": {
+      "min": 0,
+      "max": 2,
+      "mean": 1.5
+    }
+  },
+  "models": [
+    "random_forest",
+    "svm",
+    "gradient_boosting"
+  ],
+  "pass_threshold": 67
+}
