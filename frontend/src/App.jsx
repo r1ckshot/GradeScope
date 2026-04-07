@@ -1,9 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import SliderInput from './components/SliderInput'
 import DropdownInput from './components/DropdownInput'
 import ModelCard from './components/ModelCard'
 import FuzzyGauge from './components/FuzzyGauge'
 import RuleDisplay from './components/RuleDisplay'
+import { runAllModels } from './utils/inference'
+import { computeFuzzyScore, findActiveRule } from './utils/fuzzy'
+
+const FEATURES = [
+  'Attendance', 'Hours_Studied', 'Previous_Scores', 'Tutoring_Sessions',
+  'Sleep_Hours', 'Parental_Involvement', 'Access_to_Resources',
+  'Physical_Activity', 'Peer_Influence', 'Family_Income',
+  'Parental_Education_Level', 'Distance_from_Home',
+]
 
 const SLIDERS = [
   { key: 'Attendance',        label: 'Attendance (%)',    min: 60, max: 100, mean: 80 },
@@ -30,7 +39,7 @@ const defaultValues = () => {
   return v
 }
 
-function Card({ title, subtitle, children, style = {} }) {
+function Card({ title, subtitle, children, style = {}, gap = 'gap-3' }) {
   return (
     <div className="glass rounded-2xl flex flex-col" style={style}>
       <div style={{ padding: '16px 18px 10px 18px' }}>
@@ -41,7 +50,7 @@ function Card({ title, subtitle, children, style = {} }) {
           <span className="text-sm ml-2 font-normal" style={{ color: 'rgba(255,255,255,0.3)' }}> — {subtitle}</span>
         )}
       </div>
-      <div style={{ padding: '0 18px 16px 18px' }} className="flex flex-col flex-1 min-h-0 gap-3">
+      <div style={{ padding: '0 18px 16px 18px' }} className={`flex flex-col flex-1 min-h-0 ${gap}`}>
         {children}
       </div>
     </div>
@@ -49,7 +58,40 @@ function Card({ title, subtitle, children, style = {} }) {
 }
 
 function App() {
-  const [values, setValues] = useState(defaultValues)
+  const [values, setValues]         = useState(defaultValues)
+  const [results, setResults]       = useState(null)
+  const [fuzzyScore, setFuzzyScore] = useState(null)
+  const [activeRule, setActiveRule] = useState(null)
+  const [ready, setReady]           = useState(false)
+  const fuzzyParams = useRef(null)
+  const rulesData   = useRef(null)
+
+  // Load static JSON files once
+  useEffect(() => {
+    const base = import.meta.env.BASE_URL
+    Promise.all([
+      fetch(`${base}fuzzy_params.json`).then(r => r.json()),
+      fetch(`${base}rules.json`).then(r => r.json()),
+    ]).then(([fp, rules]) => {
+      fuzzyParams.current = fp
+      rulesData.current   = rules
+      setReady(true)
+    })
+  }, [])
+
+  // Run inference whenever values change (and data is loaded)
+  useEffect(() => {
+    if (!ready) return
+    const fp    = fuzzyParams.current
+    const rules = rulesData.current
+
+    const features = FEATURES.map(f => values[f] ?? 0)
+    runAllModels(features).then(r => { if (r) setResults(r) }).catch(err => console.error('[inference]', err))
+
+    if (fp) setFuzzyScore(computeFuzzyScore(values.Attendance, values.Hours_Studied, fp))
+    if (rules) setActiveRule(findActiveRule(values, rules))
+  }, [values, ready])
+
   const set = (key, val) => setValues(prev => ({ ...prev, [key]: val }))
 
   return (
@@ -65,63 +107,40 @@ function App() {
       {/* Two-column layout */}
       <div className="flex-1 min-h-0 grid" style={{ gridTemplateColumns: '1fr 72px 1fr', gap: '0 0' }}>
 
-        {/* Left column — col 1 */}
+        {/* Left column */}
         <div className="flex flex-col gap-4 min-h-0 justify-center">
-
-          {/* Academic */}
           <Card title="Academic" subtitle="numeric performance factors">
             <div className="grid grid-cols-3 gap-2">
               {SLIDERS.map(s => (
-                <SliderInput
-                  key={s.key}
-                  label={s.label}
-                  min={s.min}
-                  max={s.max}
-                  value={values[s.key]}
-                  onChange={val => set(s.key, val)}
-                />
+                <SliderInput key={s.key} label={s.label} min={s.min} max={s.max}
+                  value={values[s.key]} onChange={val => set(s.key, val)} />
               ))}
             </div>
           </Card>
-
-          {/* Background */}
           <Card title="Background" subtitle="socioeconomic factors">
             <div className="grid grid-cols-3 gap-2">
               {DROPDOWNS.map(d => (
-                <DropdownInput
-                  key={d.key}
-                  label={d.label}
-                  value={values[d.key]}
-                  onChange={val => set(d.key, val)}
-                />
+                <DropdownInput key={d.key} label={d.label}
+                  value={values[d.key]} onChange={val => set(d.key, val)} />
               ))}
             </div>
           </Card>
-
         </div>
 
-        {/* Middle — lava lamp space (col 2) */}
+        {/* Middle — lava lamp space */}
         <div />
 
-        {/* Right column — Prediction (col 3) */}
+        {/* Right column — Prediction */}
         <div className="flex flex-col min-h-0 justify-center">
-          <Card title="Prediction" subtitle="model results">
+          <Card title="Prediction" subtitle="model results" gap="gap-5">
             <div className="grid grid-cols-3 gap-2">
-              <ModelCard model="random_forest"     result={{ prediction: 1, confidence: 0.87 }} />
-              <ModelCard model="svm"               result={{ prediction: 1, confidence: 0.91 }} />
-              <ModelCard model="gradient_boosting" result={{ prediction: 0, confidence: 0.62 }} />
+              <ModelCard model="random_forest"     result={results?.random_forest} />
+              <ModelCard model="svm"               result={results?.svm} />
+              <ModelCard model="gradient_boosting" result={results?.gradient_boosting} />
             </div>
             <div className="grid grid-cols-2 gap-2">
-              <FuzzyGauge score={50} />
-              <RuleDisplay rule={{
-                conditions: [
-                  { feature: 'Attendance',      operator: '>',  threshold: 79.5  },
-                  { feature: 'Hours_Studied',   operator: '>',  threshold: 14.5  },
-                  { feature: 'Previous_Scores', operator: '<=', threshold: 73.5  },
-                ],
-                prediction: 1,
-                confidence: 0.91,
-              }} />
+              <FuzzyGauge score={fuzzyScore} />
+              <RuleDisplay rule={activeRule} />
             </div>
           </Card>
         </div>
