@@ -53,24 +53,24 @@ function App() {
   const set = (key, val) => setValues(prev => ({ ...prev, [key]: val }))
 
   return (
-    <div className="h-screen overflow-hidden flex flex-col" style={{ padding: '18px 24px 80px 24px' }}>
+    <div className="h-screen overflow-hidden flex flex-col" style={{ padding: '10px 30px 100px 30px' }}>
 
       {/* Header */}
-      <div className="shrink-0" style={{ marginBottom: '16px' }}>
+      <div className="shrink-0" style={{ marginTop: '84px' }}>
         <h1 className="text-3xl font-bold leading-none" style={{ color: '#39ff14' }}>
           GradeScope <span className="text-2xl font-normal" style={{ color: 'rgba(255,255,255,0.35)' }}>— Student Performance Predictor</span>
         </h1>
       </div>
 
       {/* Two-column layout */}
-      <div className="flex-1 min-h-0 grid gap-4" style={{ gridTemplateColumns: '1fr 1fr' }}>
+      <div className="flex-1 min-h-0 grid" style={{ gridTemplateColumns: '1fr 72px 1fr', gap: '0 0' }}>
 
-        {/* Left column */}
-        <div className="flex flex-col gap-4 min-h-0">
+        {/* Left column — col 1 */}
+        <div className="flex flex-col gap-4 min-h-0 justify-center">
 
           {/* Academic */}
-          <Card title="Academic" subtitle="numeric performance factors" style={{ flex: 3 }}>
-            <div className="grid grid-cols-2 gap-2 flex-1">
+          <Card title="Academic" subtitle="numeric performance factors">
+            <div className="grid grid-cols-3 gap-2">
               {SLIDERS.map(s => (
                 <SliderInput
                   key={s.key}
@@ -85,8 +85,8 @@ function App() {
           </Card>
 
           {/* Background */}
-          <Card title="Background" subtitle="socioeconomic factors" style={{ flex: 2 }}>
-            <div className="grid grid-cols-2 gap-2 flex-1">
+          <Card title="Background" subtitle="socioeconomic factors">
+            <div className="grid grid-cols-3 gap-2">
               {DROPDOWNS.map(d => (
                 <DropdownInput
                   key={d.key}
@@ -100,26 +100,31 @@ function App() {
 
         </div>
 
-        {/* Right column — Prediction */}
-        <Card title="Prediction" subtitle="model results">
-          <div className="grid grid-cols-3 gap-2">
-            <ModelCard model="random_forest"     result={{ prediction: 1, confidence: 0.87 }} />
-            <ModelCard model="svm"               result={{ prediction: 1, confidence: 0.91 }} />
-            <ModelCard model="gradient_boosting" result={{ prediction: 0, confidence: 0.62 }} />
-          </div>
-          <div className="grid grid-cols-2 gap-2" style={{ alignItems: 'stretch' }}>
-            <FuzzyGauge score={50} />
-            <RuleDisplay rule={{
-              conditions: [
-                { feature: 'Attendance',      operator: '>',  threshold: 79.5  },
-                { feature: 'Hours_Studied',   operator: '>',  threshold: 14.5  },
-                { feature: 'Previous_Scores', operator: '<=', threshold: 73.5  },
-              ],
-              prediction: 1,
-              confidence: 0.91,
-            }} />
-          </div>
-        </Card>
+        {/* Middle — lava lamp space (col 2) */}
+        <div />
+
+        {/* Right column — Prediction (col 3) */}
+        <div className="flex flex-col min-h-0 justify-center">
+          <Card title="Prediction" subtitle="model results">
+            <div className="grid grid-cols-3 gap-2">
+              <ModelCard model="random_forest"     result={{ prediction: 1, confidence: 0.87 }} />
+              <ModelCard model="svm"               result={{ prediction: 1, confidence: 0.91 }} />
+              <ModelCard model="gradient_boosting" result={{ prediction: 0, confidence: 0.62 }} />
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <FuzzyGauge score={50} />
+              <RuleDisplay rule={{
+                conditions: [
+                  { feature: 'Attendance',      operator: '>',  threshold: 79.5  },
+                  { feature: 'Hours_Studied',   operator: '>',  threshold: 14.5  },
+                  { feature: 'Previous_Scores', operator: '<=', threshold: 73.5  },
+                ],
+                prediction: 1,
+                confidence: 0.91,
+              }} />
+            </div>
+          </Card>
+        </div>
 
       </div>
     </div>

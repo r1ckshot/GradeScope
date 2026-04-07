@@ -30,13 +30,13 @@ export default function RuleDisplay({ rule }) {
               <span className="text-sm shrink-0" style={{ color: 'rgba(255,255,255,0.3)', minWidth: '5px', textAlign: i === 0 ? 'right' : 'left' }}>
                 {i === 0 ? 'IF' : 'AND'}
               </span>
-              <span className="text-base font-mono" style={{ color: 'rgba(255,255,255,0.75)' }}>
+              <span className="text-sm font-mono" style={{ color: 'rgba(255,255,255,0.75)' }}>
                 {c.feature.replace(/_/g, ' ')}
               </span>
-              <span className="text-base" style={{ color: 'rgba(57,255,20,0.6)' }}>
+              <span className="text-sm" style={{ color: 'rgba(57,255,20,0.6)' }}>
                 {c.operator}
               </span>
-              <span className="text-base font-mono font-semibold" style={{ color: '#39ff14' }}>
+              <span className="text-sm font-mono font-semibold" style={{ color: '#39ff14' }}>
                 {c.threshold}
               </span>
             </div>

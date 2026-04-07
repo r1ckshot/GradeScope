@@ -21,27 +21,26 @@ export default function ModelCard({ model, result }) {
     >
       <span className="text-sm text-gray-400 leading-tight">{label}</span>
 
-      <div className="flex items-center gap-2">
-        <span className="text-sm font-bold shrink-0 w-8" style={{ color }}>
+      <div className="flex justify-between items-center">
+        <span className="text-base font-bold" style={{ color }}>
           {result ? (pass ? 'PASS' : 'FAIL') : '—'}
         </span>
-
-        <div className="flex-1 rounded-full overflow-hidden" style={{ height: '4px', background: 'rgba(255,255,255,0.08)' }}>
-          {confidence !== null && (
-            <div
-              className="h-full rounded-full transition-all duration-500"
-              style={{
-                width: `${confidence * 100}%`,
-                background: color,
-                boxShadow: `0 0 6px ${color}80`,
-              }}
-            />
-          )}
-        </div>
-
-        <span className="text-sm font-mono font-semibold shrink-0" style={{ color: 'rgba(255,255,255,0.55)' }}>
+        <span className="text-lg font-mono font-bold" style={{ color: 'rgba(255,255,255,0.6)' }}>
           {confidence !== null ? `${(confidence * 100).toFixed(1)}%` : '—'}
         </span>
+      </div>
+
+      <div className="w-full rounded-full overflow-hidden" style={{ height: '4px', background: 'rgba(255,255,255,0.08)' }}>
+        {confidence !== null && (
+          <div
+            className="h-full rounded-full transition-all duration-500"
+            style={{
+              width: `${confidence * 100}%`,
+              background: color,
+              boxShadow: `0 0 6px ${color}80`,
+            }}
+          />
+        )}
       </div>
     </div>
   )
