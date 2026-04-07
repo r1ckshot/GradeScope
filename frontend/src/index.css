@@ -14,23 +14,26 @@ body {
   min-height: 100vh;
 }
 
-/* Floating blobs */
-.blob {
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.12;
-  pointer-events: none;
-  z-index: 0;
-  background: #39ff14;
-  animation: floatDown linear infinite;
+/* Lava lamp — bubble rises from sea surface */
+@keyframes lavaRise {
+  0%   { transform: translateY(0)      translateX(0);           }
+  100% { transform: translateY(-96vh)  translateX(var(--drift)); }
 }
 
-@keyframes floatDown {
-  0%   { transform: translateY(-20vh) scale(1); }
-  50%  { transform: translateY(50vh) scale(1.1); }
-  100% { transform: translateY(120vh) scale(0.95); }
+/* Top sea — slow gentle breathing */
+@keyframes seaTop {
+  0%, 100% { transform: scaleY(1);    border-radius: 0 0 40% 42%; }
+  50%      { transform: scaleY(1.08); border-radius: 0 0 46% 36%; }
 }
+
+/* Bottom sea — quiet breathing */
+@keyframes seaBottom {
+  0%, 100% { transform: scaleY(1);    border-radius: 12% 10% 0 0; }
+  50%      { transform: scaleY(1.06); border-radius: 14% 12% 0 0; }
+}
+
+.sea-top    { animation: seaTop    8s ease-in-out infinite;      transform-origin: center top;    }
+.sea-bottom { animation: seaBottom 9s ease-in-out infinite 1.5s; transform-origin: center bottom; }
 
 /* Glassmorphism card */
 .glass {

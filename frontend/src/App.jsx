@@ -4,6 +4,7 @@ import DropdownInput from './components/DropdownInput'
 import ModelCard from './components/ModelCard'
 import FuzzyGauge from './components/FuzzyGauge'
 import RuleDisplay from './components/RuleDisplay'
+import Blobs from './components/Blobs'
 import { runAllModels } from './utils/inference'
 import { computeFuzzyScore, findActiveRule } from './utils/fuzzy'
 
@@ -63,8 +64,9 @@ function App() {
   const [fuzzyScore, setFuzzyScore] = useState(null)
   const [activeRule, setActiveRule] = useState(null)
   const [ready, setReady]           = useState(false)
-  const fuzzyParams = useRef(null)
-  const rulesData   = useRef(null)
+  const fuzzyParams  = useRef(null)
+  const rulesData    = useRef(null)
+  const blobsRef = useRef(null)
 
   // Load static JSON files once
   useEffect(() => {
@@ -90,15 +92,18 @@ function App() {
 
     if (fp) setFuzzyScore(computeFuzzyScore(values.Attendance, values.Hours_Studied, fp))
     if (rules) setActiveRule(findActiveRule(values, rules))
+
   }, [values, ready])
 
   const set = (key, val) => setValues(prev => ({ ...prev, [key]: val }))
 
   return (
-    <div className="h-screen overflow-hidden flex flex-col" style={{ padding: '10px 30px 100px 30px' }}>
+    <>
+    <Blobs ref={blobsRef} />
+    <div className="h-screen overflow-hidden flex flex-col" style={{ padding: '10px 30px 100px 30px', position: 'relative', zIndex: 1 }}>
 
-      {/* Header */}
-      <div className="shrink-0" style={{ marginTop: '84px' }}>
+      {/* Header card */}
+      <div className="glass rounded-2xl shrink-0" style={{ marginTop: '84px', padding: '14px 22px' }}>
         <h1 className="text-3xl font-bold leading-none" style={{ color: '#39ff14' }}>
           GradeScope <span className="text-2xl font-normal" style={{ color: 'rgba(255,255,255,0.35)' }}>— Student Performance Predictor</span>
         </h1>
@@ -147,6 +152,7 @@ function App() {
 
       </div>
     </div>
+    </>
   )
 }
 
