@@ -20,13 +20,16 @@ export default function RuleDisplay({ rule }) {
       }}
     >
       {/* Title */}
-      <span className="text-sm text-gray-400 mb-3">Active Rule</span>
+      <div className="mb-3">
+        <span className="text-sm text-gray-400">Active Rule</span>
+        <span className="text-sm font-normal ml-2" style={{ color: 'rgba(255,255,255,0.3)' }}> — Decision Tree</span>
+      </div>
 
       {/* Rules — staircase centered */}
       <div className="flex flex-col gap-2 flex-1 justify-center items-center">
         <div className="flex flex-col gap-2" style={{ width: 'fit-content' }}>
           {unique.map((c, i) => (
-            <div key={i} className="flex items-baseline gap-2" style={{ paddingLeft: `${i * 25}px` }}>
+            <div key={i} className="flex items-baseline gap-2" style={{ paddingLeft: `${i * 20}px` }}>
               <span className="text-sm shrink-0" style={{ color: 'rgba(255,255,255,0.3)', minWidth: '5px', textAlign: i === 0 ? 'right' : 'left' }}>
                 {i === 0 ? 'IF' : 'AND'}
               </span>

@@ -27,7 +27,6 @@ export default function FuzzyGauge({ score }) {
   ].join(' ')
 
   const color = value >= 60 ? '#39ff14' : value >= 35 ? '#f0a500' : '#ff4444'
-
   return (
     <div
       className="rounded-xl flex flex-col"
@@ -38,7 +37,10 @@ export default function FuzzyGauge({ score }) {
       }}
     >
       <div className="flex justify-between items-center mb-1">
-        <span className="text-sm text-gray-400">Fuzzy Score</span>
+        <div>
+          <span className="text-sm text-gray-400">Fuzzy Score</span>
+          <span className="text-sm font-normal ml-2" style={{ color: 'rgba(255,255,255,0.3)' }}> - Attendance × H. Studied</span>
+        </div>
         <span className="text-lg font-mono font-bold" style={{ color }}>
           {score !== null && score !== undefined ? Math.round(value) : '—'}
         </span>
