@@ -3,6 +3,7 @@ import SliderInput from './components/SliderInput'
 import DropdownInput from './components/DropdownInput'
 import ModelCard from './components/ModelCard'
 import FuzzyGauge from './components/FuzzyGauge'
+import RuleDisplay from './components/RuleDisplay'
 
 const SLIDERS = [
   { key: 'Attendance',        label: 'Attendance (%)',    min: 60, max: 100, mean: 80 },
@@ -106,9 +107,17 @@ function App() {
             <ModelCard model="svm"               result={{ prediction: 1, confidence: 0.91 }} />
             <ModelCard model="gradient_boosting" result={{ prediction: 0, confidence: 0.62 }} />
           </div>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-2" style={{ alignItems: 'stretch' }}>
             <FuzzyGauge score={50} />
-            <div>{/* RuleDisplay placeholder */}</div>
+            <RuleDisplay rule={{
+              conditions: [
+                { feature: 'Attendance',      operator: '>',  threshold: 79.5  },
+                { feature: 'Hours_Studied',   operator: '>',  threshold: 14.5  },
+                { feature: 'Previous_Scores', operator: '<=', threshold: 73.5  },
+              ],
+              prediction: 1,
+              confidence: 0.91,
+            }} />
           </div>
         </Card>
 
