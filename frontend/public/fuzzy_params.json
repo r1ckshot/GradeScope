@@ -1,0 +1,20 @@
+{
+  "attendance": {
+    "universe": [60, 100],
+    "low":    [60, 60, 75],
+    "medium": [70, 80, 90],
+    "high":   [85, 100, 100]
+  },
+  "hours_studied": {
+    "universe": [1, 44],
+    "low":    [1,  1,  15],
+    "medium": [10, 20, 30],
+    "high":   [25, 44, 44]
+  },
+  "performance": {
+    "universe": [0, 100],
+    "low":    [0,   0,  40],
+    "medium": [30, 55,  70],
+    "high":   [60, 100, 100]
+  }
+}

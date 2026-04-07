@@ -1,0 +1,434 @@
+[
+  {
+    "conditions": [
+      {
+        "feature": "Attendance",
+        "operator": "<=",
+        "threshold": 79.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": "<=",
+        "threshold": 22.5
+      },
+      {
+        "feature": "Attendance",
+        "operator": "<=",
+        "threshold": 73.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": "<=",
+        "threshold": 17.5
+      }
+    ],
+    "prediction": 0,
+    "confidence": 0.972,
+    "samples": 1
+  },
+  {
+    "conditions": [
+      {
+        "feature": "Attendance",
+        "operator": "<=",
+        "threshold": 79.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": "<=",
+        "threshold": 22.5
+      },
+      {
+        "feature": "Attendance",
+        "operator": "<=",
+        "threshold": 73.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": ">",
+        "threshold": 17.5
+      }
+    ],
+    "prediction": 0,
+    "confidence": 0.8618,
+    "samples": 1
+  },
+  {
+    "conditions": [
+      {
+        "feature": "Attendance",
+        "operator": "<=",
+        "threshold": 79.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": "<=",
+        "threshold": 22.5
+      },
+      {
+        "feature": "Attendance",
+        "operator": ">",
+        "threshold": 73.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": "<=",
+        "threshold": 16.5
+      }
+    ],
+    "prediction": 0,
+    "confidence": 0.8482,
+    "samples": 1
+  },
+  {
+    "conditions": [
+      {
+        "feature": "Attendance",
+        "operator": "<=",
+        "threshold": 79.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": "<=",
+        "threshold": 22.5
+      },
+      {
+        "feature": "Attendance",
+        "operator": ">",
+        "threshold": 73.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": ">",
+        "threshold": 16.5
+      }
+    ],
+    "prediction": 0,
+    "confidence": 0.5604,
+    "samples": 1
+  },
+  {
+    "conditions": [
+      {
+        "feature": "Attendance",
+        "operator": "<=",
+        "threshold": 79.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": ">",
+        "threshold": 22.5
+      },
+      {
+        "feature": "Attendance",
+        "operator": "<=",
+        "threshold": 72.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": "<=",
+        "threshold": 27.5
+      }
+    ],
+    "prediction": 0,
+    "confidence": 0.6571,
+    "samples": 1
+  },
+  {
+    "conditions": [
+      {
+        "feature": "Attendance",
+        "operator": "<=",
+        "threshold": 79.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": ">",
+        "threshold": 22.5
+      },
+      {
+        "feature": "Attendance",
+        "operator": "<=",
+        "threshold": 72.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": ">",
+        "threshold": 27.5
+      }
+    ],
+    "prediction": 1,
+    "confidence": 0.7101,
+    "samples": 1
+  },
+  {
+    "conditions": [
+      {
+        "feature": "Attendance",
+        "operator": "<=",
+        "threshold": 79.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": ">",
+        "threshold": 22.5
+      },
+      {
+        "feature": "Attendance",
+        "operator": ">",
+        "threshold": 72.5
+      },
+      {
+        "feature": "Previous_Scores",
+        "operator": "<=",
+        "threshold": 73.5
+      }
+    ],
+    "prediction": 1,
+    "confidence": 0.7078,
+    "samples": 1
+  },
+  {
+    "conditions": [
+      {
+        "feature": "Attendance",
+        "operator": "<=",
+        "threshold": 79.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": ">",
+        "threshold": 22.5
+      },
+      {
+        "feature": "Attendance",
+        "operator": ">",
+        "threshold": 72.5
+      },
+      {
+        "feature": "Previous_Scores",
+        "operator": ">",
+        "threshold": 73.5
+      }
+    ],
+    "prediction": 1,
+    "confidence": 0.9195,
+    "samples": 1
+  },
+  {
+    "conditions": [
+      {
+        "feature": "Attendance",
+        "operator": ">",
+        "threshold": 79.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": "<=",
+        "threshold": 14.5
+      },
+      {
+        "feature": "Attendance",
+        "operator": "<=",
+        "threshold": 89.5
+      },
+      {
+        "feature": "Access_to_Resources",
+        "operator": "<=",
+        "threshold": 0.5
+      }
+    ],
+    "prediction": 0,
+    "confidence": 0.5,
+    "samples": 1
+  },
+  {
+    "conditions": [
+      {
+        "feature": "Attendance",
+        "operator": ">",
+        "threshold": 79.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": "<=",
+        "threshold": 14.5
+      },
+      {
+        "feature": "Attendance",
+        "operator": "<=",
+        "threshold": 89.5
+      },
+      {
+        "feature": "Access_to_Resources",
+        "operator": ">",
+        "threshold": 0.5
+      }
+    ],
+    "prediction": 0,
+    "confidence": 0.7853,
+    "samples": 1
+  },
+  {
+    "conditions": [
+      {
+        "feature": "Attendance",
+        "operator": ">",
+        "threshold": 79.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": "<=",
+        "threshold": 14.5
+      },
+      {
+        "feature": "Attendance",
+        "operator": ">",
+        "threshold": 89.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": "<=",
+        "threshold": 10.5
+      }
+    ],
+    "prediction": 0,
+    "confidence": 0.5333,
+    "samples": 1
+  },
+  {
+    "conditions": [
+      {
+        "feature": "Attendance",
+        "operator": ">",
+        "threshold": 79.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": "<=",
+        "threshold": 14.5
+      },
+      {
+        "feature": "Attendance",
+        "operator": ">",
+        "threshold": 89.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": ">",
+        "threshold": 10.5
+      }
+    ],
+    "prediction": 1,
+    "confidence": 0.7738,
+    "samples": 1
+  },
+  {
+    "conditions": [
+      {
+        "feature": "Attendance",
+        "operator": ">",
+        "threshold": 79.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": ">",
+        "threshold": 14.5
+      },
+      {
+        "feature": "Attendance",
+        "operator": "<=",
+        "threshold": 84.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": "<=",
+        "threshold": 20.5
+      }
+    ],
+    "prediction": 1,
+    "confidence": 0.556,
+    "samples": 1
+  },
+  {
+    "conditions": [
+      {
+        "feature": "Attendance",
+        "operator": ">",
+        "threshold": 79.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": ">",
+        "threshold": 14.5
+      },
+      {
+        "feature": "Attendance",
+        "operator": "<=",
+        "threshold": 84.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": ">",
+        "threshold": 20.5
+      }
+    ],
+    "prediction": 1,
+    "confidence": 0.902,
+    "samples": 1
+  },
+  {
+    "conditions": [
+      {
+        "feature": "Attendance",
+        "operator": ">",
+        "threshold": 79.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": ">",
+        "threshold": 14.5
+      },
+      {
+        "feature": "Attendance",
+        "operator": ">",
+        "threshold": 84.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": "<=",
+        "threshold": 16.5
+      }
+    ],
+    "prediction": 1,
+    "confidence": 0.8148,
+    "samples": 1
+  },
+  {
+    "conditions": [
+      {
+        "feature": "Attendance",
+        "operator": ">",
+        "threshold": 79.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": ">",
+        "threshold": 14.5
+      },
+      {
+        "feature": "Attendance",
+        "operator": ">",
+        "threshold": 84.5
+      },
+      {
+        "feature": "Hours_Studied",
+        "operator": ">",
+        "threshold": 16.5
+      }
+    ],
+    "prediction": 1,
+    "confidence": 0.968,
+    "samples": 1
+  }
+]
