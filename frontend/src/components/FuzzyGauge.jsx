@@ -11,12 +11,12 @@ export default function FuzzyGauge({ score }) {
     return `M ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2}`
   }
 
-  // Кінчик стрілки
+  // Needle tip position
   const tipLen = r * 0.70
   const tx = cx + tipLen * Math.cos(angle)
   const ty = cy - tipLen * Math.sin(angle)
 
-  // Трикутник наконечника — 3 точки навколо кінчика
+  // Arrow triangle — 3 points around the tip
   const arrowSize = 5
   const perpX = -Math.sin(angle)
   const perpY = -Math.cos(angle)
@@ -45,29 +45,29 @@ export default function FuzzyGauge({ score }) {
       </div>
 
       <svg viewBox="8 10 184 106" width="100%" style={{ overflow: 'visible' }}>
-        {/* Тло */}
+        {/* Background arc */}
         <path d={arcPath(Math.PI, 0)} fill="none" stroke="rgba(255,255,255,0.07)" strokeWidth="10" strokeLinecap="round" />
-        {/* Прогрес */}
+        {/* Progress arc */}
         {pct > 0 && (
           <path d={arcPath(Math.PI, angle)} fill="none" stroke={color} strokeWidth="10" strokeLinecap="round"
             style={{ filter: `drop-shadow(0 0 5px ${color}90)` }} />
         )}
-        {/* Лінія стрілки */}
+        {/* Needle line */}
         <line
           x1={cx} y1={cy}
           x2={tx} y2={ty}
           stroke={color} strokeWidth="2" strokeLinecap="round"
           style={{ filter: `drop-shadow(0 0 3px ${color})` }}
         />
-        {/* Наконечник */}
+        {/* Arrowhead */}
         <polygon
           points={arrowPoints}
           fill={color}
           style={{ filter: `drop-shadow(0 0 3px ${color})` }}
         />
-        {/* Центр */}
+        {/* Pivot */}
         <circle cx={cx} cy={cy} r="4" fill={color} />
-        {/* Мітки — біля кінців дуги, не всередині */}
+        {/* Zone labels */}
         <text x="22"  y="113" textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.3)">Low</text>
         <text x="100" y="36"  textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.3)">Mid</text>
         <text x="178" y="113" textAnchor="middle" fontSize="9" fill="rgba(255,255,255,0.3)">High</text>
