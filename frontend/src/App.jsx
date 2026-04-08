@@ -66,7 +66,6 @@ function App() {
   const [ready, setReady]           = useState(false)
   const fuzzyParams  = useRef(null)
   const rulesData    = useRef(null)
-  const blobsRef = useRef(null)
 
   // Load static JSON files once
   useEffect(() => {
@@ -99,7 +98,7 @@ function App() {
 
   return (
     <>
-    <Blobs ref={blobsRef} />
+    <Blobs />
     <div className="h-screen overflow-hidden flex flex-col" style={{ padding: '18px 18px 100px 18px', position: 'relative', zIndex: 1 }}>
 
       {/* Header card */}

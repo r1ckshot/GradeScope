@@ -1,11 +1,11 @@
-import { useEffect, useRef, useImperativeHandle, forwardRef, useState, useCallback, memo } from 'react'
+import { useEffect, useState, useCallback, memo } from 'react'
 
 let uid = 0
 
 const SEA_SURFACE = 90  // bottom sea: bottom:-20 + height:110
 
 function newBlob() {
-  const size = 60 + Math.random() * 55  // 60–115 px
+  const size = 60 + Math.random() * 55
   return {
     id:       uid++,
     left:     3 + Math.random() * 91,
@@ -16,11 +16,9 @@ function newBlob() {
   }
 }
 
-// Memoized so it never re-renders when blobs state changes
 const SeaShapes = memo(function SeaShapes() {
   return (
     <>
-      {/* ── Top sea — receives bubbles ── */}
       <div className="sea-top" style={{
         position: 'absolute',
         top: -20,
@@ -30,8 +28,6 @@ const SeaShapes = memo(function SeaShapes() {
         background: '#39ff14',
         transformOrigin: 'center top',
       }} />
-
-      {/* ── Bottom sea — quiet breathing ── */}
       <div className="sea-bottom" style={{
         position: 'absolute',
         bottom: -20,
@@ -45,7 +41,7 @@ const SeaShapes = memo(function SeaShapes() {
   )
 })
 
-const Blobs = forwardRef(function Blobs(_, ref) {
+export default function Blobs() {
   const [blobs, setBlobs] = useState(() => [newBlob(), newBlob(), newBlob()])
 
   const removeBlob = useCallback((id) => {
@@ -55,8 +51,6 @@ const Blobs = forwardRef(function Blobs(_, ref) {
   const addBlob = useCallback(() => {
     setBlobs(prev => [...prev, newBlob()])
   }, [])
-
-  useImperativeHandle(ref, () => ({ pulse: () => {} }))
 
   useEffect(() => {
     let t = setInterval(addBlob, 2800)
@@ -77,10 +71,7 @@ const Blobs = forwardRef(function Blobs(_, ref) {
       background: '#0d0f0d',
       filter: 'blur(22px) contrast(11)',
     }}>
-
       <SeaShapes />
-
-      {/* ── Bubbles rising from sea ── */}
       {blobs.map(b => (
         <div key={b.id} onAnimationEnd={() => removeBlob(b.id)} style={{
           position: 'absolute',
@@ -94,9 +85,6 @@ const Blobs = forwardRef(function Blobs(_, ref) {
           '--drift': `${b.drift}px`,
         }} />
       ))}
-
     </div>
   )
-})
-
-export default Blobs
+}
