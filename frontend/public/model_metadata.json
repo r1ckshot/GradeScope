@@ -78,7 +78,8 @@
   "models": [
     "random_forest",
     "svm",
-    "gradient_boosting"
+    "knn",
+    "neural_network"
   ],
   "pass_threshold": 67
 }
