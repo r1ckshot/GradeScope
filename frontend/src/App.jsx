@@ -63,6 +63,7 @@ function App() {
   const [results, setResults]       = useState(null)
   const [fuzzyScore, setFuzzyScore] = useState(null)
   const [activeRule, setActiveRule] = useState(null)
+  const [isAnomaly, setIsAnomaly]   = useState(false)
   const [ready, setReady]           = useState(false)
   const fuzzyParams  = useRef(null)
   const rulesData    = useRef(null)
@@ -88,7 +89,12 @@ function App() {
     const rules = rulesData.current
 
     const features = FEATURES.map(f => values[f] ?? 0)
-    runAllModels(features).then(r => { if (r) setResults(r) }).catch(err => console.error('[inference]', err))
+    runAllModels(features).then(r => {
+      if (r) {
+        setResults(r)
+        setIsAnomaly(r.anomaly)
+      }
+    }).catch(err => console.error('[inference]', err))
 
     if (fp) setFuzzyScore(computeFuzzyScore(values.Attendance, values.Hours_Studied, fp))
     if (rules) setActiveRule(findActiveRule(values, rules))
@@ -103,10 +109,24 @@ function App() {
     <div className="h-screen overflow-hidden flex flex-col" style={{ padding: '18px 18px 100px 18px', position: 'relative', zIndex: 1 }}>
 
       {/* Header card */}
-      <div className="glass rounded-2xl shrink-0" style={{ marginTop: '70px', padding: '10px 26px' }}>
+      <div className="glass rounded-2xl shrink-0 flex items-center justify-between" style={{ marginTop: '70px', padding: '10px 26px' }}>
         <h1 className="text-3xl font-bold leading-none" style={{ color: '#39ff14' }}>
           GradeScope <span className="text-2xl font-normal" style={{ color: 'rgba(255,255,255,0.35)' }}>— Student Performance Predictor</span>
         </h1>
+        <span
+          className="text-base font-semibold rounded-full whitespace-nowrap"
+          style={{
+            background: 'rgba(255,165,0,0.15)',
+            color: '#ffa500',
+            border: '1px solid rgba(255,165,0,0.35)',
+            padding: '4px 14px',
+            opacity: isAnomaly ? 1 : 0,
+            transition: 'opacity 0.3s ease',
+            pointerEvents: 'none',
+          }}
+        >
+          ⚠ Atypical profile
+        </span>
       </div>
 
       {/* Two-column layout */}

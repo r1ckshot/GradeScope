@@ -20,7 +20,7 @@ function getSession(modelName) {
 
 // Call once at startup to load all sessions in parallel before first inference
 export function preloadModels() {
-  ;['random_forest', 'svm', 'knn', 'neural_network'].forEach(name => getSession(name))
+  ;['random_forest', 'svm', 'knn', 'neural_network', 'anomaly'].forEach(name => getSession(name))
 }
 
 export async function runModel(modelName, features) {
@@ -39,6 +39,17 @@ export async function runModel(modelName, features) {
   return { prediction, confidence }
 }
 
+export async function runAnomalyModel(features) {
+  const session = await getSession('anomaly')
+  const tensor = new ort.Tensor('float32', Float32Array.from(features), [1, features.length])
+  const feeds = { [session.inputNames[0]]: tensor }
+  const results = await session.run(feeds)
+  // IsolationForest: -1 = anomaly, 1 = normal
+  // int64 output may arrive as BigInt in ORT Web — Number() normalises both cases
+  const raw = results[session.outputNames[0]].data[0]
+  return Number(raw) < 0
+}
+
 let inferenceRunning = false
 
 export async function runAllModels(features) {
@@ -46,11 +57,12 @@ export async function runAllModels(features) {
   inferenceRunning = true
   try {
     // Sequential — ORT WASM allows only one session.run() at a time globally
-    const rf  = await runModel('random_forest', features)
-    const svm = await runModel('svm', features)
-    const knn = await runModel('knn', features)
-    const nn  = await runModel('neural_network', features)
-    return { random_forest: rf, svm, knn, neural_network: nn }
+    const rf      = await runModel('random_forest', features)
+    const svm     = await runModel('svm', features)
+    const knn     = await runModel('knn', features)
+    const nn      = await runModel('neural_network', features)
+    const anomaly = await runAnomalyModel(features)
+    return { random_forest: rf, svm, knn, neural_network: nn, anomaly }
   } finally {
     inferenceRunning = false
   }
