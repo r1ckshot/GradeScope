@@ -5,7 +5,7 @@ import ModelCard from './components/ModelCard'
 import FuzzyGauge from './components/FuzzyGauge'
 import RuleDisplay from './components/RuleDisplay'
 import Blobs from './components/Blobs'
-import { runAllModels } from './utils/inference'
+import { runAllModels, preloadModels } from './utils/inference'
 import { computeFuzzyScore, findActiveRule } from './utils/fuzzy'
 
 const FEATURES = [
@@ -67,8 +67,9 @@ function App() {
   const fuzzyParams  = useRef(null)
   const rulesData    = useRef(null)
 
-  // Load static JSON files once
+  // Load static JSON files and preload ONNX sessions in parallel
   useEffect(() => {
+    preloadModels()
     const base = import.meta.env.BASE_URL
     Promise.all([
       fetch(`${base}fuzzy_params.json`).then(r => r.json()),
@@ -133,13 +134,14 @@ function App() {
 
         {/* Right column — Prediction */}
         <div className="flex flex-col min-h-0 justify-center">
-          <Card title="Prediction" subtitle="model results" gap="gap-5">
-            <div className="grid grid-cols-3 gap-3">
-              <ModelCard model="random_forest"     result={results?.random_forest} />
-              <ModelCard model="svm"               result={results?.svm} />
-              <ModelCard model="gradient_boosting" result={results?.gradient_boosting} />
-            </div>
+          <Card title="Prediction" subtitle="model results" gap="gap-2">
             <div className="grid grid-cols-2 gap-3">
+              <ModelCard model="random_forest"  result={results?.random_forest} />
+              <ModelCard model="svm"            result={results?.svm} />
+              <ModelCard model="knn"            result={results?.knn} />
+              <ModelCard model="neural_network" result={results?.neural_network} />
+            </div>
+            <div className="grid grid-cols-2 gap-2">
               <FuzzyGauge score={fuzzyScore} />
               <RuleDisplay rule={activeRule} />
             </div>

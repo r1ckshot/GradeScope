@@ -7,14 +7,20 @@ ort.env.wasm.numThreads = 1
 const BASE = import.meta.env.BASE_URL
 const sessions = {}
 
-async function getSession(modelName) {
+function getSession(modelName) {
   if (!sessions[modelName]) {
-    sessions[modelName] = await ort.InferenceSession.create(
+    // Store the Promise — not the resolved session — so parallel calls share one load
+    sessions[modelName] = ort.InferenceSession.create(
       `${BASE}models/${modelName}.onnx`,
       { executionProviders: ['wasm'] }
     )
   }
   return sessions[modelName]
+}
+
+// Call once at startup to load all sessions in parallel before first inference
+export function preloadModels() {
+  ;['random_forest', 'svm', 'knn', 'neural_network'].forEach(name => getSession(name))
 }
 
 export async function runModel(modelName, features) {
@@ -42,8 +48,9 @@ export async function runAllModels(features) {
     // Sequential — ORT WASM allows only one session.run() at a time globally
     const rf  = await runModel('random_forest', features)
     const svm = await runModel('svm', features)
-    const gb  = await runModel('gradient_boosting', features)
-    return { random_forest: rf, svm, gradient_boosting: gb }
+    const knn = await runModel('knn', features)
+    const nn  = await runModel('neural_network', features)
+    return { random_forest: rf, svm, knn, neural_network: nn }
   } finally {
     inferenceRunning = false
   }

@@ -1,7 +1,8 @@
 const MODEL_LABELS = {
-  random_forest:       'Random Forest',
-  svm:                 'SVM',
-  gradient_boosting:   'Gradient Boosting',
+  random_forest:  'Random Forest',
+  svm:            'SVM',
+  knn:            'KNN',
+  neural_network: 'Neural Network',
 }
 
 export default function ModelCard({ model, result }) {
