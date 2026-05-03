@@ -5,7 +5,7 @@
 🔗 **Live demo:** [r1ckshot.github.io/GradeScope](https://r1ckshot.github.io/GradeScope)
 
 <table>
-  <td><img src="https://github.com/user-attachments/assets/13fbc6e4-8d65-459d-9755-655f9a16cb5d" alt="GradeScope Dashboard"/></td>
+  <td><img src="https://github.com/user-attachments/assets/9778234f-f152-4690-8edb-631c63a3e04d" alt="GradeScope Dashboard"/></td>
 </table>
 
 ---
@@ -13,8 +13,12 @@
 ## ✨ Features
 
 ### ⚡ Real-time ML Inference
-- Three models running live in the browser — Random Forest, SVM, Gradient Boosting
+- Four models running live in the browser — Random Forest, SVM, KNN, Neural Network
 - Predictions update instantly as you move sliders, no button needed
+
+### ⚠️ Anomaly Detection
+- Isolation Forest flags atypical student profiles in real time
+- Badge appears when the input combination falls outside the training distribution
 
 ### 🔢 Fuzzy Logic Score
 - Continuous 0–100 performance estimate based on attendance and study hours
@@ -42,7 +46,9 @@ Python (scikit-learn) → ONNX export → Browser (onnxruntime-web)
 |---|---|
 | EDA & preprocessing | pandas, numpy, matplotlib, seaborn |
 | Feature selection | RandomForest importance + PCA |
-| Models | Random Forest, SVM, Gradient Boosting |
+| Models | Random Forest, SVM, KNN, Neural Network |
+| Calibration | CalibratedClassifierCV (sigmoid, cv=5) |
+| Anomaly detection | Isolation Forest |
 | Symbolic rules | Decision Tree (`max_depth=4`) |
 | Fuzzy logic | scikit-fuzzy |
 | ONNX export | skl2onnx |
@@ -77,7 +83,9 @@ This project was built using **Claude Code** as the primary coding assistant.
 ## 📚 What I Learned
 
 - Running ML models fully client-side via ONNX Runtime Web — no backend, no API calls
-- Exporting sklearn Pipelines to ONNX while keeping StandardScaler inside the model
+- Exporting sklearn Pipelines to ONNX while keeping StandardScaler and calibration inside the model
+- Probability calibration with `CalibratedClassifierCV` (Platt scaling, 5-fold CV)
+- Anomaly detection with Isolation Forest — ONNX int64 output and BigInt safety in JS
 - Reimplementing fuzzy logic (trimf, defuzzification) in vanilla JavaScript
 - Single-threaded WASM constraints with onnxruntime-web and sequential inference
 - CSS metaball technique: `filter: blur() contrast()` for organic lava lamp animations
