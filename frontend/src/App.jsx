@@ -106,12 +106,12 @@ function App() {
   return (
     <>
     <Blobs />
-    <div className="h-screen overflow-hidden flex flex-col" style={{ padding: '18px 18px 100px 18px', position: 'relative', zIndex: 1 }}>
+    <div className="min-h-screen lg:h-screen lg:overflow-hidden flex flex-col px-3 pt-3 pb-8 lg:px-[18px] lg:pt-[18px] lg:pb-[100px]" style={{ position: 'relative', zIndex: 1 }}>
 
       {/* Header card */}
-      <div className="glass rounded-2xl shrink-0 flex items-center justify-between" style={{ marginTop: '70px', padding: '10px 26px' }}>
-        <h1 className="text-3xl font-bold leading-none" style={{ color: '#39ff14' }}>
-          GradeScope <span className="text-2xl font-normal" style={{ color: 'rgba(255,255,255,0.35)' }}>— Student Performance Predictor</span>
+      <div className="glass rounded-2xl shrink-0 flex items-center justify-between flex-wrap gap-2 mt-14 lg:mt-[70px]" style={{ padding: '10px 26px' }}>
+        <h1 className="text-2xl lg:text-3xl font-bold leading-none" style={{ color: '#39ff14' }}>
+          GradeScope <span className="hidden sm:inline text-xl lg:text-2xl font-normal" style={{ color: 'rgba(255,255,255,0.35)' }}>— Student Performance Predictor</span>
         </h1>
         <span
           className="text-base font-semibold rounded-full whitespace-nowrap"
@@ -130,12 +130,12 @@ function App() {
       </div>
 
       {/* Two-column layout */}
-      <div className="flex-1 min-h-0 grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '0 20px' }}>
+      <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-y-0" style={{ columnGap: '20px' }}>
 
         {/* Left column */}
-        <div className="flex flex-col gap-3 min-h-0 justify-center">
+        <div className="flex flex-col gap-3 min-h-0 lg:justify-center">
           <Card title="Academic" subtitle="numeric performance factors">
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {SLIDERS.map(s => (
                 <SliderInput key={s.key} label={s.label} min={s.min} max={s.max}
                   value={values[s.key]} onChange={val => set(s.key, val)} />
@@ -143,7 +143,7 @@ function App() {
             </div>
           </Card>
           <Card title="Background" subtitle="socioeconomic factors">
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {DROPDOWNS.map(d => (
                 <DropdownInput key={d.key} label={d.label}
                   value={values[d.key]} onChange={val => set(d.key, val)} />
@@ -153,7 +153,7 @@ function App() {
         </div>
 
         {/* Right column — Prediction */}
-        <div className="flex flex-col min-h-0 justify-center">
+        <div className="flex flex-col min-h-0 lg:justify-center">
           <Card title="Prediction" subtitle="model results" gap="gap-2">
             <div className="grid grid-cols-2 gap-3">
               <ModelCard model="random_forest"  result={results?.random_forest} />
@@ -161,7 +161,7 @@ function App() {
               <ModelCard model="knn"            result={results?.knn} />
               <ModelCard model="neural_network" result={results?.neural_network} />
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <FuzzyGauge score={fuzzyScore} />
               <RuleDisplay rule={activeRule} />
             </div>
