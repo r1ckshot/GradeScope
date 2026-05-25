@@ -106,16 +106,20 @@ function App() {
   return (
     <>
     <Blobs />
-    <div className="min-h-screen lg:h-screen lg:overflow-hidden flex flex-col px-3 pt-3 pb-8 lg:px-[18px] lg:pt-[18px] lg:pb-[100px]" style={{ position: 'relative', zIndex: 1 }}>
+    <div className="app-container flex flex-col" style={{ position: 'relative', zIndex: 1 }}>
 
       {/* Header card */}
-      <div className="glass rounded-2xl shrink-0 flex items-center justify-between flex-wrap gap-2 mt-14 lg:mt-[70px]" style={{ padding: '10px 26px' }}>
+      <div className="app-header glass rounded-2xl shrink-0 flex flex-row items-center" style={{ padding: '10px 26px', position: 'relative' }}>
         <h1 className="text-2xl lg:text-3xl font-bold leading-none" style={{ color: '#39ff14' }}>
-          GradeScope <span className="hidden sm:inline text-xl lg:text-2xl font-normal" style={{ color: 'rgba(255,255,255,0.35)' }}>— Student Performance Predictor</span>
+          GradeScope <span className="hidden lg:inline text-xl lg:text-2xl font-normal" style={{ color: 'rgba(255,255,255,0.35)' }}>— Student Performance Predictor</span>
         </h1>
         <span
-          className="text-base font-semibold rounded-full whitespace-nowrap"
+          className={`text-sm lg:text-base font-semibold rounded-full whitespace-nowrap ${isAnomaly ? 'block' : 'hidden lg:block'}`}
           style={{
+            position: 'absolute',
+            right: '16px',
+            top: '50%',
+            transform: 'translateY(-50%)',
             background: 'rgba(255,165,0,0.15)',
             color: '#ffa500',
             border: '1px solid rgba(255,165,0,0.35)',
@@ -130,7 +134,7 @@ function App() {
       </div>
 
       {/* Two-column layout */}
-      <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-y-0" style={{ columnGap: '20px' }}>
+      <div className="app-grid lg:flex-1 lg:min-h-0 grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-y-0" style={{ columnGap: '20px' }}>
 
         {/* Left column */}
         <div className="flex flex-col gap-3 min-h-0 lg:justify-center">

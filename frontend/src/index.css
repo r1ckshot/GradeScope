@@ -63,6 +63,39 @@ input[type="range"]::-moz-range-thumb {
   cursor: pointer;
 }
 
+/* App container — mobile scrollable, desktop locked viewport */
+.app-container {
+  min-height: 100vh;
+  padding: 12px 12px 32px 12px;
+}
+@media (min-width: 1024px) {
+  .app-container {
+    height: 100vh;
+    overflow: hidden;
+    padding: 18px 18px 100px 18px;
+  }
+}
+
+/* Header top spacing */
+.app-header {
+  margin-top: 0;
+}
+@media (min-width: 1024px) {
+  .app-header {
+    margin-top: 70px;
+  }
+}
+
+/* Grid spacing after header */
+.app-grid {
+  margin-top: 16px;
+}
+@media (min-width: 1024px) {
+  .app-grid {
+    margin-top: 0;
+  }
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #0d0f0d; }
